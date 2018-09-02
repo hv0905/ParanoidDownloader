@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28010.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ParanoidDownloader", "ParanoidDownloader\ParanoidDownloader.csproj", "{7B10B7F6-BFC6-4546-A095-2BD0BA0C9E87}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ParanoidDownloader_Demo", "ParanoidDownloader_Demo\ParanoidDownloader_Demo.csproj", "{B2BD9840-145F-4242-8305-5422FC0889E9}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7B10B7F6-BFC6-4546-A095-2BD0BA0C9E87}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7B10B7F6-BFC6-4546-A095-2BD0BA0C9E87}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7B10B7F6-BFC6-4546-A095-2BD0BA0C9E87}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7B10B7F6-BFC6-4546-A095-2BD0BA0C9E87}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B2BD9840-145F-4242-8305-5422FC0889E9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B2BD9840-145F-4242-8305-5422FC0889E9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B2BD9840-145F-4242-8305-5422FC0889E9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B2BD9840-145F-4242-8305-5422FC0889E9}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {2A1E0F5C-ADE3-46F8-97D0-95656FC22B34}
+	EndGlobalSection
+EndGlobal

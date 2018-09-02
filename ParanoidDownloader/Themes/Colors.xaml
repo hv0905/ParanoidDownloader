@@ -1,0 +1,49 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:ParanoidDownloader">
+
+    <SolidColorBrush x:Key="windowBg" Color="#C0833471"/>
+
+    <x:Array x:Key="primaryColorPreview" Type="{x:Type local:MaterialDesignColorDemo}">
+        <local:MaterialDesignColorDemo ColorDemo="#FFEB3B" Name="yellow"/>
+        <local:MaterialDesignColorDemo ColorDemo="#FFC107" Name="amber"/>
+        <local:MaterialDesignColorDemo ColorDemo="#FF5722" Name="deeporange"/>
+        <local:MaterialDesignColorDemo ColorDemo="#03A9F4" Name="lightblue"/>
+        <local:MaterialDesignColorDemo ColorDemo="#009688" Name="teal"/>
+        <local:MaterialDesignColorDemo ColorDemo="#00BCD4" Name="cyan"/>
+        <local:MaterialDesignColorDemo ColorDemo="#E91E63" Name="pink"/>
+        <local:MaterialDesignColorDemo ColorDemo="#4CAF50" Name="green"/>
+        <local:MaterialDesignColorDemo ColorDemo="#673AB7" Name="deeppurple"/>
+        <local:MaterialDesignColorDemo ColorDemo="#3F51B5" Name="indigo"/>
+        <local:MaterialDesignColorDemo ColorDemo="#8BC34A" Name="lightgreen"/>
+        <local:MaterialDesignColorDemo ColorDemo="#2196F3" Name="blue"/>
+        <local:MaterialDesignColorDemo ColorDemo="#CDDC39" Name="lime"/>
+        <local:MaterialDesignColorDemo ColorDemo="#F44336" Name="red"/>
+        <local:MaterialDesignColorDemo ColorDemo="#FF9800" Name="orange"/>
+        <local:MaterialDesignColorDemo ColorDemo="#9C27B0" Name="purple"/>
+        <local:MaterialDesignColorDemo ColorDemo="#607D8B" Name="bluegrey"/>
+        <local:MaterialDesignColorDemo ColorDemo="#9E9E9E" Name="grey"/>
+        <local:MaterialDesignColorDemo ColorDemo="#795548" Name="brown"/>
+    </x:Array>
+
+    <x:Array x:Key="accentColorPreview" Type="{x:Type local:MaterialDesignColorDemo}">
+        <local:MaterialDesignColorDemo ColorDemo="#FFEA00" Name="yellow"/>
+        <local:MaterialDesignColorDemo ColorDemo="#FFC400" Name="amber"/>
+        <local:MaterialDesignColorDemo ColorDemo="#FF3D00" Name="deeporange"/>
+        <local:MaterialDesignColorDemo ColorDemo="#00B0FF" Name="lightblue"/>
+        <local:MaterialDesignColorDemo ColorDemo="#1DE9B6" Name="teal"/>
+        <local:MaterialDesignColorDemo ColorDemo="#00E5FF" Name="cyan"/>
+        <local:MaterialDesignColorDemo ColorDemo="#F50057" Name="pink"/>
+        <local:MaterialDesignColorDemo ColorDemo="#00E676" Name="green"/>
+        <local:MaterialDesignColorDemo ColorDemo="#651FFF" Name="deeppurple"/>
+        <local:MaterialDesignColorDemo ColorDemo="#3D5AFE" Name="indigo"/>
+        <local:MaterialDesignColorDemo ColorDemo="#76FF03" Name="lightgreen"/>
+        <local:MaterialDesignColorDemo ColorDemo="#2979FF" Name="blue"/>
+        <local:MaterialDesignColorDemo ColorDemo="#C6FF00" Name="lime"/>
+        <local:MaterialDesignColorDemo ColorDemo="#FF1744" Name="red"/>
+        <local:MaterialDesignColorDemo ColorDemo="#FF9100" Name="orange"/>
+        <local:MaterialDesignColorDemo ColorDemo="#D500F9" Name="purple"/>
+    </x:Array>
+
+
+</ResourceDictionary>

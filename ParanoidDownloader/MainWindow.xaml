@@ -1,0 +1,257 @@
+﻿<Window x:Class="ParanoidDownloader.MainWindow" x:Name="main"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ParanoidDownloader" Style="{StaticResource BorderlessWindowStyle}"
+        xmlns:materialDesign="clr-namespace:MaterialDesignThemes.Wpf;assembly=MaterialDesignThemes.Wpf"
+        xmlns:transitions="http://materialdesigninxaml.net/winfx/xaml/themes"
+        mc:Ignorable="d"
+        Title="ParanoidDownloader" Height="500" Width="870">
+    <Window.TaskbarItemInfo>
+        <TaskbarItemInfo ProgressState="Indeterminate" />
+    </Window.TaskbarItemInfo>
+    <Window.Background>
+        <ImageBrush ImageSource="WpfImages/normal_background.jpg" Stretch="UniformToFill" />
+    </Window.Background>
+    <Window.Resources>
+        <local:FileSizeTextConverter x:Key="fileSizeTextConverter" />
+        <local:PercentConverter x:Key="percentConverter" />
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="25" />
+            <RowDefinition />
+            <RowDefinition Height="30" />
+        </Grid.RowDefinitions>
+        <DockPanel Grid.Row="0">
+            <Button Style="{StaticResource closeCaptionButtonStyle}" Width="40" DockPanel.Dock="Right"
+                    Click="CloseBtn_OnClick" />
+            <Button Style="{StaticResource maxCaptionStyle}" Width="30" DockPanel.Dock="Right"
+                    Click="MaxButton_OnClick" />
+            <Button Style="{StaticResource minCaptionButtonStyle}" Width="30" DockPanel.Dock="Right"
+                    Click="MinButton_OnClick" />
+            <Button Style="{StaticResource MenuCaptionButtonStyle}" Width="30" DockPanel.Dock="Right" />
+            <TextBlock MouseLeftButtonDown="DragTitle" Text="{Binding Title, ElementName=main}"
+                       Foreground="{StaticResource MaterialDesignDarkForeground}" FontSize="16" TextAlignment="Center"
+                       VerticalAlignment="Center" />
+        </DockPanel>
+        <materialDesign:DialogHost x:Name="buildinDialog" Grid.Row="1" IsOpen="False" Margin="0,5,0,25"
+                                   Grid.RowSpan="2">
+        </materialDesign:DialogHost>
+        <Grid Grid.Row="1"> 
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="50" />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="50" />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <ListBox x:Name="listKind" SelectedIndex="0" Grid.Row="1" Grid.Column="0">
+                    <ListBox.Items>
+                        <ListBoxItem ToolTip="正在下载">
+                            <materialDesign:PackIcon Kind="Download" HorizontalAlignment="Stretch" Width="30"
+                                                     Height="30" Margin="2,0,0,0" />
+                        </ListBoxItem>
+                        <ListBoxItem ToolTip="已完成">
+                            <materialDesign:PackIcon Kind="CheckAll" HorizontalAlignment="Stretch" Width="30"
+                                                     Height="30" Margin="2,0,0,0" />
+                        </ListBoxItem>
+                        <ListBoxItem ToolTip="隐藏空间">
+                            <materialDesign:PackIcon Kind="Lock" HorizontalAlignment="Stretch" Width="30" Height="30"
+                                                     Margin="2,0,0,0" />
+                        </ListBoxItem>
+                        <ListBoxItem ToolTip="最近删除">
+                            <materialDesign:PackIcon Kind="Delete" HorizontalAlignment="Stretch" Width="30" Height="30"
+                                                     Margin="2,0,0,0" />
+                        </ListBoxItem>
+                    </ListBox.Items>
+                </ListBox>
+                <transitions:Transitioner x:Name="toolbarTrans" Grid.Row="0" Grid.Column="1" SelectedIndex="0">
+                    <ToolBarTray Background="{x:Null}">
+                        <ToolBar Background="{x:Null}"
+                                 Style="{DynamicResource MaterialDesignToolBar}"
+                                 ClipToBounds="False">
+                            <Button Click="NewBtn_OnClick"
+                                    ToolTip="新建">
+                                <StackPanel Orientation="Horizontal">
+                                    <materialDesign:PackIcon Kind="Plus" />
+                                    <TextBlock Text="新建" FontSize="18" VerticalAlignment="Center" Margin="5,0,0,0"></TextBlock>
+                                </StackPanel>
+                            </Button>
+                            <Separator />
+                            <Button ToolTip="开始" Click="StartBtn_OnClick">
+                                <materialDesign:PackIcon Kind="Play" />
+                            </Button>
+                            <Button ToolTip="暂停" Click="PauseBtn_OnClick">
+                                <materialDesign:PackIcon Kind="Pause" />
+                            </Button>
+                            <Separator />
+                            <Button ToolTip="逐任务下载" ToolBar.OverflowMode="AsNeeded">
+                                <Grid>
+                                    <materialDesign:PackIcon Kind="Numeric1BoxMultipleOutline" Visibility="Visible" />
+                                    <materialDesign:PackIcon Kind="Animation" Visibility="Collapsed" />
+                                </Grid>
+                            </Button>
+                            <Separator />
+                            <Button ToolTip="删除任务" ToolBar.OverflowMode="AsNeeded">
+                                <materialDesign:PackIcon
+                                    Kind="Delete" />
+                            </Button>
+                            <Separator />
+                            <Button ToolTip="打开下载文件夹" ToolBar.OverflowMode="AsNeeded">
+                                <materialDesign:PackIcon Kind="Folder" />
+                            </Button>
+                            <Separator />
+                            <materialDesign:PackIcon Kind="Magnify" HorizontalAlignment="Stretch"
+                                                     VerticalAlignment="Stretch"/>
+                            <TextBox Width="200" materialDesign:HintAssist.Hint="在列表中搜索" />
+                            <Button ToolTip="排序方式" ToolBar.OverflowMode="AsNeeded">
+                                <materialDesign:PackIcon Kind="FormatListBulleted" />
+                            </Button>
+                            <Button ToolTip="设置" ToolBar.OverflowMode="AsNeeded" Click="SettingBtn_Click">
+                                <materialDesign:PackIcon Kind="Settings" />
+                            </Button>
+                        </ToolBar>
+                    </ToolBarTray>
+                    <ToolBarTray Background="{x:Null}">
+                        <ToolBar Background="{x:Null}">
+                            <Button ToolTip="返回" Click="DetailBack_OnClick">
+                                <StackPanel Orientation="Horizontal">
+                                    <materialDesign:PackIcon Kind="ArrowLeft" />
+                                    <TextBlock Text="返回" FontSize="18" />
+                                </StackPanel>
+                            </Button>
+                            <Separator />
+                            <Button ToolTip="开始">
+                                <materialDesign:PackIcon Kind="Play" />
+                            </Button>
+                            <Button ToolTip="暂停">
+                                <materialDesign:PackIcon Kind="Pause" />
+                            </Button>
+                            <Separator />
+                            <ListBox Background="{x:Null}"
+                                SelectedIndex="0">
+                                <ListBoxItem Background="{x:Null}">
+                                <materialDesign:PackIcon
+                                        Kind="ChartLine" />
+                            </ListBoxItem>
+                                <ListBoxItem Background="{x:Null}">
+                                    <materialDesign:PackIcon
+                                        Kind="Drag" />
+                                </ListBoxItem>
+                                <ListBoxItem>
+                                    <materialDesign:PackIcon Kind="FormatListChecks"/>
+                                </ListBoxItem>
+                            </ListBox>
+                        </ToolBar>
+                    </ToolBarTray>
+                </transitions:Transitioner>
+                <transitions:Transitioner x:Name="infoTrans" Grid.Row="1" Grid.Column="1" SelectedIndex="0">
+                    <ListBox x:Name="missionList" MouseDoubleClick="MissionList_OnMouseDoubleClick">
+                        <ListBox.ContextMenu>
+                            <ContextMenu>
+                                <MenuItem Header="信息" Click="MenuInfo_OnClick">
+                                    <MenuItem.Icon>
+                                        <materialDesign:PackIcon Kind="Information" />
+                                    </MenuItem.Icon>
+                                </MenuItem>
+                                <Separator />
+                                <MenuItem Header="暂停">
+                                    <MenuItem.Icon>
+                                        <materialDesign:PackIcon Kind="Pause" />
+                                    </MenuItem.Icon>
+                                </MenuItem>
+                                <MenuItem Header="继续">
+                                    <MenuItem.Icon>
+                                        <materialDesign:PackIcon Kind="Play" />
+                                    </MenuItem.Icon>
+                                </MenuItem>
+                                <Separator />
+                                <MenuItem Header="打开文件">
+                                    <MenuItem.Icon>
+                                        <materialDesign:PackIcon Kind="File" />
+                                    </MenuItem.Icon>
+                                </MenuItem>
+                                <MenuItem Header="打开下载文件夹">
+                                    <MenuItem.Icon>
+                                        <materialDesign:PackIcon Kind="Folder" />
+                                    </MenuItem.Icon>
+                                </MenuItem>
+                                <Separator />
+                                <MenuItem Header="复制URL">
+                                    <MenuItem.Icon>
+                                        <materialDesign:PackIcon Kind="ContentCopy" />
+                                    </MenuItem.Icon>
+                                </MenuItem>
+
+                                <Separator />
+                                <MenuItem Header="删除">
+                                    <MenuItem.Icon>
+                                        <materialDesign:PackIcon Kind="Delete" />
+                                    </MenuItem.Icon>
+                                </MenuItem>
+                                <MenuItem Header="删除(包含文件)">
+                                    <MenuItem.Icon>
+                                        <materialDesign:PackIcon Kind="DeleteForever" />
+                                    </MenuItem.Icon>
+                                </MenuItem>
+                            </ContextMenu>
+                        </ListBox.ContextMenu>
+                        <ListBox.Background>
+                            <SolidColorBrush Color="Black" Opacity="0.6" />
+                        </ListBox.Background>
+                        <ListBox.ItemTemplate>
+                            <ItemContainerTemplate>
+                                <Grid HorizontalAlignment="Stretch"
+                                      Width="{Binding ActualWidth, ElementName=missionList}">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="50" />
+                                        <ColumnDefinition />
+                                        <ColumnDefinition Width="100" />
+                                        <ColumnDefinition Width="20" />
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition />
+                                        <RowDefinition />
+                                    </Grid.RowDefinitions>
+                                    <materialDesign:PackIcon Kind="File" Grid.RowSpan="2" Width="50" Height="50" />
+                                    <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding FileName}" FontSize="14"
+                                               VerticalAlignment="Center" />
+                                    <TextBlock Grid.Row="0" Grid.Column="2"
+                                               Text="{Binding FileSize,Converter={StaticResource fileSizeTextConverter}}"
+                                               FontSize="14" VerticalAlignment="Center" />
+                                    <TextBlock Grid.Row="1" Grid.Column="2"
+                                               Text="{Binding ProgressPercent,Converter={StaticResource percentConverter}}"
+                                               FontSize="14" VerticalAlignment="Center" />
+                                    <ProgressBar Grid.Row="1" Grid.Column="1" Maximum="100" Minimum="0"
+                                                 Value="{Binding ProgressPercent}" Height="10" Margin="2" />
+                                </Grid>
+                            </ItemContainerTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                    <Grid x:Name="detailBox" Background="DodgerBlue"/>
+                </transitions:Transitioner>
+            </Grid>
+
+        <DockPanel Grid.Row="2">
+            <Button DockPanel.Dock="Left" Width="150" Style="{StaticResource MaterialDesignFlatButton}"
+                    Foreground="White">
+                <StackPanel Orientation="Horizontal">
+                    <materialDesign:PackIcon Kind="PlaylistCheck" VerticalAlignment="Center" />
+                    <TextBlock Text="计划任务" FontSize="16" />
+                </StackPanel>
+            </Button>
+            <Button DockPanel.Dock="Right" Width="300" Style="{StaticResource MaterialDesignFlatButton}"
+                    Foreground="White" HorizontalAlignment="Right">
+                <StackPanel Orientation="Horizontal">
+                    <materialDesign:PackIcon Kind="ArrowDown" VerticalAlignment="Center" Margin="0,0,5,0" />
+                    <TextBlock Text="1M/S" FontSize="16" Margin="5,0,5,0" />
+                    <TextBlock Text="8Mbps" FontSize="16" Margin="5,0,5,0" />
+                    <transitions:PackIcon Kind="Speedometer" VerticalAlignment="Center" Margin="5,0,0,0" />
+                </StackPanel>
+            </Button>
+        </DockPanel>
+    </Grid>
+</Window>
